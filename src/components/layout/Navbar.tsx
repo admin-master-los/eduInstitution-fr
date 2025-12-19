@@ -7,10 +7,10 @@ import Button from '../ui/Button';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [language, setLanguage] = useState<'fr' | 'en'>(() => {
+  const [language, setLanguage] = useState<'en' | 'fr'>(() => {
     // Détecter la langue depuis l'URL actuelle
     const currentUrl = window.location.hostname;
-    return currentUrl.includes('-en.') ? 'en' : 'fr';
+    return currentUrl.includes('-fr.') ? 'fr' : 'en';
   });
 
   useEffect(() => {
