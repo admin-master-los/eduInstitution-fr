@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, GraduationCap } from 'lucide-react';
+import { Menu, X, GraduationCap, Languages } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { institution, navigation } from '../../data/siteContent';
 import Button from '../ui/Button';
@@ -7,6 +7,11 @@ import Button from '../ui/Button';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [language, setLanguage] = useState<'fr' | 'en'>(() => {
+    // Détecter la langue depuis l'URL actuelle
+    const currentUrl = window.location.hostname;
+    return currentUrl.includes('-en.') ? 'en' : 'fr';
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +28,14 @@ export default function Navbar() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const toggleLanguage = () => {
+    const newLang = language === 'fr' ? 'en' : 'fr';
+    const targetUrl = newLang === 'fr' 
+      ? 'https://eduinstitution-fr.leonceouattarastudiogroup.site/'
+      : 'https://eduinstitution-en.leonceouattarastudiogroup.site/';
+    window.location.href = targetUrl;
   };
 
   return (
@@ -62,6 +75,14 @@ export default function Navbar() {
                 {item.label}
               </a>
             ))}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center space-x-1 text-gray-700 hover:text-burgundy-700 font-medium transition-colors"
+              aria-label="Changer de langue"
+            >
+              <Languages className="h-5 w-5" />
+              <span className="text-sm">{language.toUpperCase()}</span>
+            </button>
             <Button variant="primary" size="sm" href="#admissions">
               Candidater
             </Button>
@@ -99,6 +120,14 @@ export default function Navbar() {
                     {item.label}
                   </a>
                 ))}
+                <button
+                  onClick={toggleLanguage}
+                  className="flex items-center space-x-2 text-gray-700 hover:text-burgundy-700 font-medium transition-colors py-2"
+                  aria-label="Changer de langue"
+                >
+                  <Languages className="h-5 w-5" />
+                  <span>{language === 'fr' ? 'Français' : 'English'}</span>
+                </button>
                 <Button variant="primary" size="sm" href="#admissions" className="w-full">
                   Candidater
                 </Button>
