@@ -31,10 +31,10 @@ export default function Navbar() {
   };
 
   const toggleLanguage = () => {
-    const newLang = language === 'fr' ? 'en' : 'fr';
-    const targetUrl = newLang === 'fr' 
-      ? 'https://eduinstitution-fr.leonceouattarastudiogroup.site/'
-      : 'https://eduinstitution-en.leonceouattarastudiogroup.site/';
+    const newLang = language === 'en' ? 'fr' : 'en';
+    const targetUrl = newLang === 'en' 
+      ? 'https://eduinstitution-en.leonceouattarastudiogroup.site/'
+      : 'https://eduinstitution-fr.leonceouattarastudiogroup.site/';
     window.location.href = targetUrl;
   };
 
@@ -126,7 +126,7 @@ export default function Navbar() {
                   aria-label="Changer de langue"
                 >
                   <Languages className="h-5 w-5" />
-                  <span>{language === 'fr' ? 'Français' : 'English'}</span>
+                  <span>{language === 'en' ? 'English' : 'Français'}</span>
                 </button>
                 <Button variant="primary" size="sm" href="#admissions" className="w-full">
                   Candidater
